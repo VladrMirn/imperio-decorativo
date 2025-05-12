@@ -17,6 +17,26 @@
       .then(reg => console.log('✅ Service Worker registrado:', reg))
       .catch(err => console.log('❌ Error registrando SW:', err));
   }
+
+  let deferredPrompt;
+  const installBtn = document.getElementById('btn-instalar');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'inline-block';
+
+    installBtn.addEventListener('click', async () => {
+      installBtn.style.display = 'none';
+      deferredPrompt.prompt();
+
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('🧠 Usuario eligió:', outcome);
+      deferredPrompt = null;
+    });
+  });
+
+
   </script>
 </body>
 </html>
