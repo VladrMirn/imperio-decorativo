@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Instalar App del Imperio</title>
+  <link rel="manifest" href="/imperio-decorativo/manifest.json" />
+</head>
+<body>
+  <h2>¡Instala nuestra App!</h2>
+  <button id="btn-instalar" style="padding:12px 20px;">📲 Instalar</button>
+  
+  <script>
+    // Vibración y beep
+    const beep = new Audio('https://www.soundjay.com/buttons/sounds/button-11.mp3');
+    const vibrarYSonar = () => {
+      if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+      beep.play();
+    };
+
+    // Registro del SW
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/imperio-decorativo/service-worker.js')
+        .then(r => console.log('✅ Service Worker activo'))
+        .catch(e => console.error('❌ Falló el SW', e));
+    }
+
+    let deferredPrompt;
+    const installBtn = document.getElementById('btn-instalar');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+
+      installBtn.addEventListener('click', async () => {
+        vibrarYSonar();
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log('🧠 Resultado:', outcome);
+        deferredPrompt = null;
+      });
+    });
+  </script>
+</body>
+</html>
