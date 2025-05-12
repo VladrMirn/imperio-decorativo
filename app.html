@@ -1,45 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Instalar App del Imperio</title>
-  <link rel="manifest" href="/imperio-decorativo/manifest.json" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instala la App del Imperio</title>
+  <link rel="manifest" href="/imperio-decorativo/manifest.json">
+  <meta name="theme-color" content="#d42">
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background: #fffbe6;
+      color: #333;
+    }
+    button {
+      padding: 1rem 2rem;
+      margin: 1rem;
+      background-color: #d42;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .oculto {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <h2>¡Instala nuestra App!</h2>
-  <button id="btn-instalar" style="padding:12px 20px;">📲 Instalar</button>
-  
-  <script>
-    // Vibración y beep
-    const beep = new Audio('https://www.soundjay.com/buttons/sounds/button-11.mp3');
-    const vibrarYSonar = () => {
-      if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-      beep.play();
-    };
 
-    // Registro del SW
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/imperio-decorativo/service-worker.js')
-        .then(r => console.log('✅ Service Worker activo'))
-        .catch(e => console.error('❌ Falló el SW', e));
+  <h1>📲 Instala la App del Imperio</h1>
+  <p>Acceso rápido, sin conexión, y con notificaciones.</p>
+
+  <button id="btn-instalar" class="oculto">🚀 Instalar App</button>
+  <button id="btn-notificar" class="oculto">🔔 Activar Notificaciones</button>
+  <p id="estado"></p>
+
+  <audio id="beep" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+
+  <script>
+    // Detectar si ya está instalada
+    function esAppInstalada() {
+      return window.matchMedia('(display-mode: standalone)').matches ||
+             window.navigator.standalone === true;
     }
 
-    let deferredPrompt;
-    const installBtn = document.getElementById('btn-instalar');
+    const btnInstalar = document.getElementById('btn-instalar');
+    const btnNotificar = document.getElementById('btn-notificar');
+    const estado = document.getElementById('estado');
+    const beep = document.getElementById('beep');
 
+    if (esAppInstalada()) {
+      estado.textContent = "✅ Ya tienes la App instalada";
+      btnNotificar.classList.remove('oculto');
+    } else {
+      estado.textContent = "🧠 Puedes instalar la App si quieres!";
+    }
+
+    // Vibración y beep al cargar
+    window.addEventListener('load', () => {
+      navigator.vibrate?.(200);
+      beep.play().catch(() => {});
+    });
+
+    // Instalar Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/imperio-decorativo/service-worker.js')
+        .then(reg => console.log('✅ Service Worker registrado:', reg))
+        .catch(err => console.error('❌ Error registrando SW:', err));
+    }
+
+    // Instalación PWA
+    let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      installBtn.style.display = 'inline-block';
+      btnInstalar.classList.remove('oculto');
+    });
 
-      installBtn.addEventListener('click', async () => {
-        vibrarYSonar();
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log('🧠 Resultado:', outcome);
-        deferredPrompt = null;
-      });
+    btnInstalar.addEventListener('click', async () => {
+      beep.play();
+      navigator.vibrate?.([100, 50, 100]);
+      btnInstalar.classList.add('oculto');
+      deferredPrompt.prompt();
+      const resultado = await deferredPrompt.userChoice;
+      console.log('🧠 Usuario eligió:', resultado.outcome);
+      deferredPrompt = null;
+    });
+
+    // Notificaciones Push (simples, locales)
+    btnNotificar.addEventListener('click', async () => {
+      const permiso = await Notification.requestPermission();
+      if (permiso === 'granted') {
+        new Notification('🌟 ¡Gracias por activar las notificaciones!');
+        navigator.vibrate?.(150);
+        beep.play();
+      } else {
+        alert('No activaste las notificaciones 😢');
+      }
     });
   </script>
+
 </body>
 </html>
