@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instala la App del Imperio</title>
-  <link rel="manifest" href="/imperio-decorativo/manifest.json">
-  <meta name="theme-color" content="#d42">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>App del Imperio</title>
+  <link rel="manifest" href="/imperio-decorativo/manifest.json" />
+  <meta name="theme-color" content="#d42" />
   <style>
     body {
       font-family: sans-serif;
@@ -31,53 +31,56 @@
 </head>
 <body>
 
-  <h1>📲 Instala la App del Imperio</h1>
-  <p>Acceso rápido, sin conexión, y con notificaciones.</p>
+  <h1>📲 ¡Bienvenida al Imperio Decorativo!</h1>
+  <p id="estado">Verificando estado de tu app...</p>
 
   <button id="btn-instalar" class="oculto">🚀 Instalar App</button>
   <button id="btn-notificar" class="oculto">🔔 Activar Notificaciones</button>
-  <p id="estado"></p>
 
   <audio id="beep" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
   <script>
-    // Detectar si ya está instalada
-    function esAppInstalada() {
-      return window.matchMedia('(display-mode: standalone)').matches ||
-             window.navigator.standalone === true;
-    }
-
     const btnInstalar = document.getElementById('btn-instalar');
     const btnNotificar = document.getElementById('btn-notificar');
     const estado = document.getElementById('estado');
     const beep = document.getElementById('beep');
 
-    if (esAppInstalada()) {
-      estado.textContent = "✅ Ya tienes la App instalada";
-      btnNotificar.classList.remove('oculto');
-    } else {
-      estado.textContent = "🧠 Puedes instalar la App si quieres!";
+    // Verificar si la app ya está instalada
+    function estaInstalada() {
+      return window.matchMedia('(display-mode: standalone)').matches ||
+             window.navigator.standalone === true;
     }
 
-    // Vibración y beep al cargar
+    if (estaInstalada()) {
+      estado.textContent = '✅ Ya tienes la App instalada';
+      btnNotificar.classList.remove('oculto');
+    } else {
+      estado.textContent = '🧠 Puedes instalar la App si quieres!';
+    }
+
+    // Beep y vibración
     window.addEventListener('load', () => {
-      navigator.vibrate?.(200);
+      navigator.vibrate?.(100);
       beep.play().catch(() => {});
     });
 
-    // Instalar Service Worker
+    // Registrar Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/imperio-decorativo/service-worker.js')
-        .then(reg => console.log('✅ Service Worker registrado:', reg))
-        .catch(err => console.error('❌ Error registrando SW:', err));
+        .then(reg => console.log('✅ SW registrado', reg))
+        .catch(err => console.error('❌ SW error', err));
     }
 
-    // Instalación PWA
+    // PWA instalación
     let deferredPrompt;
+
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      btnInstalar.classList.remove('oculto');
+
+      if (!estaInstalada()) {
+        btnInstalar.classList.remove('oculto');
+      }
     });
 
     btnInstalar.addEventListener('click', async () => {
@@ -88,9 +91,22 @@
       const resultado = await deferredPrompt.userChoice;
       console.log('🧠 Usuario eligió:', resultado.outcome);
       deferredPrompt = null;
+
+      if (resultado.outcome === 'accepted') {
+        estado.textContent = '🎉 ¡Gracias por instalar la app!';
+        btnNotificar.classList.remove('oculto');
+      }
     });
 
-    // Notificaciones Push (simples, locales)
+    // Detectar si fue instalada
+    window.addEventListener('appinstalled', () => {
+      console.log('📦 App fue instalada');
+      estado.textContent = '🎉 App instalada correctamente';
+      btnInstalar.classList.add('oculto');
+      btnNotificar.classList.remove('oculto');
+    });
+
+    // Notificaciones
     btnNotificar.addEventListener('click', async () => {
       const permiso = await Notification.requestPermission();
       if (permiso === 'granted') {
