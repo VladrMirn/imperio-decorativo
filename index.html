@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Imperio Decorativo</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon-192.png" sizes="192x192">
-</head>
-<body>
-  <h1>¡Bienvenida al Imperio Decorativo!</h1>
-  <p>Tu app ya está lista para instalar y funcionar offline.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imperio Decorativo</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icon-192.png" sizes="192x192">
+  </head>
+  
+  <body>
+    
+    <h1>¡Bienvenida al Imperio Decorativo!</h1>
+    <p>Tu app ya está lista para instalar y funcionar offline.</p>
 
-  <script>
-   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/imperio-decorativo/service-worker.js')
-      .then(reg => console.log('✅ Service Worker registrado:', reg))
-      .catch(err => console.log('❌ Error registrando SW:', err));
-  }
+    <button id="btn-instalar" style="display: none;">
+      📲 Instalar App
+    </button>
+    
+    <script>
+      
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/imperio-decorativo/service-worker.js')
+          .then(reg => console.log('✅ Service Worker registrado:', reg))
+          .catch(err => console.log('❌ Error registrando SW:', err));
+      }
+      let deferredPrompt;
+      const installBtn = document.getElementById('btn-instalar');
 
-  let deferredPrompt;
-  const installBtn = document.getElementById('btn-instalar');
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.style.display = 'inline-block';
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.style.display = 'inline-block';
+        installBtn.addEventListener('click', async () => {
+          installBtn.style.display = 'none';
+          deferredPrompt.prompt();
 
-    installBtn.addEventListener('click', async () => {
-      installBtn.style.display = 'none';
-      deferredPrompt.prompt();
-
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log('🧠 Usuario eligió:', outcome);
-      deferredPrompt = null;
-    });
-  });
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log('🧠 Usuario eligió:', outcome);
+          deferredPrompt = null;
+        });
+      });
 
 
-  </script>
-</body>
+    </script>
+  </body>
 </html>
