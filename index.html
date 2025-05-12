@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imperio Decorativo</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" sizes="192x192">
+</head>
+<body>
+  <h1>¡Bienvenida al Imperio Decorativo!</h1>
+  <p>Tu app ya está lista para instalar y funcionar offline.</p>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").then(() => {
+        console.log("Service Worker registrado con éxito.");
+      }).catch((error) => {
+        console.error("Fallo en el registro del Service Worker:", error);
+      });
+    }
+  </script>
+</body>
+</html>
