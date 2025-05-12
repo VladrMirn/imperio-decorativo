@@ -1,3 +1,5 @@
+<base href="/">
+
 const CACHE_NAME = "imperio-decorativo-v1";
 const urlsToCache = [
   "/",
