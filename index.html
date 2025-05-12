@@ -12,13 +12,11 @@
   <p>Tu app ya está lista para instalar y funcionar offline.</p>
 
   <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").then(() => {
-        console.log("Service Worker registrado con éxito.");
-      }).catch((error) => {
-        console.error("Fallo en el registro del Service Worker:", error);
-      });
-    }
+   if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/imperio-decorativo/service-worker.js')
+      .then(reg => console.log('✅ Service Worker registrado:', reg))
+      .catch(err => console.log('❌ Error registrando SW:', err));
+  }
   </script>
 </body>
 </html>
