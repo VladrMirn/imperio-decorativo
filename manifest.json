@@ -1,7 +1,7 @@
 {
   "name": "Imperio Decorativo",
   "short_name": "Imperio",
-  "start_url": "/",
+  "start_url": "/imperio-decorativo/"
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#bfa36f",
