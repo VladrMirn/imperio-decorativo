@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>App del Imperio</title>
+  <link rel="manifest" href="/imperio-decorativo/manifest.json" />
+  <meta name="theme-color" content="#d42" />
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background: #fffbe6;
+      color: #333;
+    }
+    button {
+      padding: 1rem 2rem;
+      margin: 1rem;
+      background-color: #d42;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .oculto {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📲 ¡Bienvenida al Imperio Decorativo!</h1>
+  <p id="estado">Verificando estado de tu app...</p>
+
+  <button id="btn-instalar" class="oculto">🚀 Instalar App</button>
+  <button id="btn-notificar" class="oculto">🔔 Activar Notificaciones</button>
+
+  <audio id="beep" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+
+  <script>
+    const btnInstalar = document.getElementById('btn-instalar');
+    const btnNotificar = document.getElementById('btn-notificar');
+    const estado = document.getElementById('estado');
+    const beep = document.getElementById('beep');
+
+    // Verificar si la app ya está instalada
+    function estaInstalada() {
+      return window.matchMedia('(display-mode: standalone)').matches ||
+             window.navigator.standalone === true;
+    }
+
+    if (estaInstalada()) {
+      estado.textContent = '✅ Ya tienes la App instalada';
+      btnNotificar.classList.remove('oculto');
+    } else {
+      estado.textContent = '🧠 Puedes instalar la App si quieres!';
+    }
+
+    // Beep y vibración
+    window.addEventListener('load', () => {
+      navigator.vibrate?.(100);
+      beep.play().catch(() => {});
+    });
+
+    // Registrar Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/imperio-decorativo/service-worker.js')
+        .then(reg => console.log('✅ SW registrado', reg))
+        .catch(err => console.error('❌ SW error', err));
+    }
+
+    // PWA instalación
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      if (!estaInstalada()) {
+        btnInstalar.classList.remove('oculto');
+      }
+    });
+
+    btnInstalar.addEventListener('click', async () => {
+      beep.play();
+      navigator.vibrate?.([100, 50, 100]);
+      btnInstalar.classList.add('oculto');
+      deferredPrompt.prompt();
+      const resultado = await deferredPrompt.userChoice;
+      console.log('🧠 Usuario eligió:', resultado.outcome);
+      deferredPrompt = null;
+
+      if (resultado.outcome === 'accepted') {
+        estado.textContent = '🎉 ¡Gracias por instalar la app!';
+        btnNotificar.classList.remove('oculto');
+      }
+    });
+
+    // Detectar si fue instalada
+    window.addEventListener('appinstalled', () => {
+      console.log('📦 App fue instalada');
+      estado.textContent = '🎉 App instalada correctamente';
+      btnInstalar.classList.add('oculto');
+      btnNotificar.classList.remove('oculto');
+    });
+
+    // Notificaciones
+    btnNotificar.addEventListener('click', async () => {
+      const permiso = await Notification.requestPermission();
+      if (permiso === 'granted') {
+        new Notification('🌟 ¡Gracias por activar las notificaciones!');
+        navigator.vibrate?.(150);
+        beep.play();
+      } else {
+        alert('No activaste las notificaciones 😢');
+      }
+    });
+  </script>
+
+</body>
+</html>
