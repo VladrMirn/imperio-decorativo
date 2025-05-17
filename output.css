@@ -187,3 +187,16 @@
     }
   }
 }
+.text-3xl {
+  font-size: 2em;
+  line-height: 1.2;
+}
+.font-bold {
+  font-weight: 700;
+}
+.text-blue-600 {
+  color: #2563eb;
+}
+.underline {
+  text-decoration: underline;
+}
