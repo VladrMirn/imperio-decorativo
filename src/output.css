@@ -557,7 +557,9 @@ video {
 @font-face {
   font-family: 'Cinzel';
 
-  src: url('./paginas/assets/Cinzel-VariableFont_wght.woff2') format('woff2');
+  /* src: url('./paginas/assets/Cinzel-VariableFont_wght.woff2') format('woff2'); */
+
+  src: url('https://imperiodecorativo.github.io/imperio-decorativo/src/assets/fonts/Cinzel-VariableFont_wght.woff2') format('woff2');
 
   font-style: normal;
 
@@ -569,7 +571,9 @@ video {
 @font-face {
   font-family: 'Cabin';
 
-  src: url('./paginas/assets/Cabin.woff2') format('woff2');
+  /* src: url('./paginas/assets/Cabin.woff2') format('woff2'); */
+
+  src: url('https://imperiodecorativo.github.io/imperio-decorativo/src/assets/fonts/Cabin.woff2') format('woff2');
 
   font-style: normal;
 
@@ -581,7 +585,7 @@ video {
 @font-face {
   font-family: 'Mukta';
 
-  src: url('https://imperiodecorativo.github.io/imperio-decorativo/fonts/Mukta-Regular.woff2') format('woff2');
+  src: url('https://imperiodecorativo.github.io/imperio-decorativo/src/assets/fonts/Mukta-Regular.woff2') format('woff2');
 
   font-weight: normal;
 
@@ -1538,6 +1542,8 @@ a {
 /* === SECCIÓN DE "ARTÍCULO" O TEXTO DEL CUERPO === */
 
 .prose {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(224 224 224 / var(--tw-text-opacity, 1));
 }
