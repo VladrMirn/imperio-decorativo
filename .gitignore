@@ -15,5 +15,5 @@ p/
 
 # Puedes ignorar src completo si solo quieres subir output.css
 src/
-!src/paginas/assets
+!src/assets
 !src/output.css
