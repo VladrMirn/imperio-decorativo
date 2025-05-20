@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Tailwind</title>
+ <link href="../output.css" rel="stylesheet" />
+ 
+</head>
+<body class="bg-dark text-light">
+ 
+ <style>
+
+  /*BAJAMOS EL "COMPARTIR" DE LA ESQUINA SUPERIOR DERECHA */
+  .post-share-buttons.post-share-buttons-top {
+    margin-top: 5px !important;
+  }
+
+  /* INSERTA UN ESPACIO EN LA PARTE SUPERIOR DE TODA LA ENTRADA*/
+  /*.post-body {
+  margin-top: 100px;
+  }*/
+  
+  /* OCULTA LA BARRA DE NAVEGACIÓN DE LA ENTRADA */
+  header.centered-top-container {
+    display: none !important;
+  }
+  
+  /* OCULTA LA BARRA DE NAVEGACIÓN CLONADA DE LA ENTRADA */
+  .centered-top-placeholder.cloned {
+    display: none !important;
+  }
+  
+  /* GLOBAL: Solo una vez en el post (común para todas las fases si se usa el mismo estilo) */
+  .separator {
+    clear: both;
+  }
+
+  /* BOTÓN QUE BRILLA - usado en Fase 1 */
+  @keyframes glow {
+    0% { box-shadow: 0 0 0px #3fcf6f; }
+    50% { box-shadow: 0 0 12px #3fcf6f; }
+    100% { box-shadow: 0 0 0px #3fcf6f; }
+  }
+
+  #boton-verde {
+    animation: glow 3s infinite ease-in-out;
+  }
+
+  /* OCULTAR TÍTULO DE LA ENTRADA */
+  .post-title {
+    display: none;
+  }
+  
+ 
+
+</style>
+
+<div class="w-full max-w-[860px] p-2 sm:px-6 lg:px-0 mx-auto">
+
+<div id="cabecera-fija" class="relative text-center text-graylight">
+
+  <!-- Caja oculta solo para mantener la lógica del contador1 -->
+  <div id="contenedor-cajas-1" class="hidden"></div>
+
+ <!-- BOTÓN FIJO -->
+  <div class="fixed-button-wrapper">
+    <div id="fixed-button" class="fixed-button hidden">
+      <span id="contenido-fixed-button"></span>
+    </div>
+  </div>
+
+  <!-- Botón PWA oculto -->
+  <button id="btn-instalar" class="hidden">Instalar esta App</button>
+
+  <!-- Espacio arriba -->
+  <div id="espaciador-boton" class="h-14 hidden"></div>
+
+  <!-- Subtítulo informativo (menos fuerte) -->
+  <h2 id="titulo-clase" class="subtitulo">
+    💻 <u>Clase <i>Online</i> Gratuita:</u>
+  </h2>
+
+  <!-- TÍTULO PRINCIPAL (¡con poder visual!) -->
+  <h2 class="titulo-principal">
+    Transforma Simples Globos en Cautivadoras Flores que Sorprenden... y se Venden
+  </h2>
+
+  <!-- DECORACIÓN: Línea imperial debajo del título -->
+  <img 
+    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8IoSXkYuFZ4vRj_pKoAON3yJNTPOs_MeJxhLD9LWcrjSU7m8iYaWToBMJqO3vwlKjJ69MXKxaiz7csH6VF72RhcBrYj9LVUOivBellhLR6WpsigG_PgSEi6kTCsLg-AyqhgKjZpVQEMDStMcVAnhZid7bMRX-iG72nkliZ7jDk7E42u4eSDymrjTvwUU/s320/fili.png" 
+    alt="Filigrana decorativa imperial" 
+    class="mx-auto w-40 lg:w-80 -mt-8"
+  />
+ 
+  <!-- Texto dinámico -->
+  <p id="texto-video" class="text-lg mb-2 hidden"></p>
+  
+  <!-- Contador 2 -->
+  <p id="contenedor-cajas-2" class="text-center font-bold hidden">
+    <span id="texto-contador-2">⏳ Faltan solo:</span>
+    <span id="contador2-tiempo" class="ml-2">00h 00m 00s</span>
+  </p>
+
+  <!-- Enlace dinámico -->
+  <p class="text-center">
+    <a id="enlace-video" href="#" target="_blank" class="hidden underline text-gold hover:text-white transition mb-4"></a>
+  </p>
+
+  <!-- VÍDEO (dinámico) DEL LANZAMIENTO -->
+  <div class="vid-wrapper hidden overflow-hidden border border-gray-700 mt-2" id="bloque-video-dinamico"></div>
+  
+  <!-- Iframe oculto para hotlink, va ENCIMA del vídeo -->
+  <iframe name="oculto" class="hidden"></iframe>
+
+  <!-- Chat dinámico -->
+  <div id="bloque-chat-dinamico" class="chat-wrapper hidden border border-gray-700 mb-4"></div>
+  
+</div>
+  
+  
+
+
+
+<div id="bloque-fase-1" style="display: none;">
+  
+  <div  class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+      <img alt="Portada Flores con Globos" height="360" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIAO3oiYtxis_m798bGSpc0Vh0UmSn_JPUhJp58pT3fI_DfEdIPyOsR9kBkWmOOkcqU3RKrCO3SWodKIJdx0ZIB1LZusLKh8Jhm39ChGxRIi7TDYrmhDz_f7QFMJ3HkNP0nWLTrnfNk9SYdMLrjkYIUPBPFtsE1dtLjX_ZYexdyXOuY7XUr0n40-e4W1bP/w640-h360/PORTADA%20FLORES%20CON%20GLOBOS.jpg" width="640" />
+    </a>
+  </div>
+  <article class="prose prose-lg text-light max-w-none tracking-wide">
+  <p>Ahora puedes aprender una habilidad que <u>muy pocas</u> personas dominan: <br /></p>
+  <p><b>Diseñar, dar forma y crear impresionantes flores... hechas completamente a partir de globos.</b></p>
+  <p>Sin necesidad de tener experiencia previa.</p>
+  <p><b>Ideal si quieres sorprender a familiares o amigos, crear decoraciones impactantes o generar ingresos extras con creaciones que parecen mágicas.</b></p>
+
+  <!--Aquí va la fecha de cuando comienza la masterclass... es una constante que está del todo abajo-->
+  <p id="texto-fecha-1" style="text-align: center;"></p>
+
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+      <img alt="Decoracion de flores con globos" border="0" data-original-height="1042" data-original-width="960" height="640" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjls63Qv0cuCyCgDSerlR6J5zjuflN4D0e5_j9K5cZoQGEj44fYxILeqE4oRwwTAr1le2sZ0n4uRth8DKsdPYWPKEVJdgqVNpewTAwh45IdpRP6Fg35pev3qPByHzPMyBjWKBj59iinrKpXAhn66ii29rknNqvjR8kutDbsyweD3K-F6t895j50kaCITUI/w590-h640/photo_2025-04-25_15-55-01.jpg" width="590" />
+    </a>
+  </div>
+
+  <h2 class="text-light">💌 ¿Cómo participar?</h2>
+  <p>Solo quienes pertenecen a nuestro <b>Círculo de Creativas Imperiales</b> recibirán el acceso directo por email.</p>
+  <p>Además, <u>todos los días</u> te comparto secretos, humor ácido y consejos tan buenos que tu único problema será no haberte unido antes.</p>
+  <p>No esperes más y regístrate AHORA dando clic en el botón verde de aquí abajo 👇:</p>
+
+  <div style="text-align: center;">
+    <button id="boton-verde" onclick="window.open('https://imperiodecorativo.substack.com/subscribe?utm_source=menu&amp;simple=true', '_blank')" style="background-color: lime; border-radius: 8px; border: none; color: #212121; cursor: pointer; font-size: 1.2em; padding: 1em 1.5em;">
+      ✉️ <b>¡SÍ! Quiero los secretos de las Flores con Globos</b>
+    </button>
+  </div>
+  
+  <p><b><u>NOTA:</u></b> Debes confirmar tu suscripción.<br />Si no encuentras el Correo de Confirmación en tu Bandeja de Entrada, busca en la carpeta Spam o en Promociones —Gmail a veces tiene celos—.</p><br />
+  
+  <h2>🗓️ Detalles que Tienes que Saber</h2>
+  <ul>
+    <li>🎓 <b><i>Masterclass</i>:</b> Conviértete en Experta en Flores con Globos</li>
+    <li id="texto-fecha-2"></li>
+    <li>📍 <b>Dónde:</b> En Vivo por Youtube</li>
+    <li>🔗 <b>Enlace de Acceso:</b> disponible para usuarias registradas</li>
+    <li>🔨 <b>Qué necesitas:</b> lápiz, papel y todas las ganas de aprender</li>
+    <li>🕘 <b>Hora:</b> 9:10 AM (hora Perú)</li>
+    <li>🌎 <b>Hora en otros países:</b></li>
+  </ul>
+  
+  <br />
+  
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+      <img alt="Horario en otros países" height="640" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXkN8TzrPBEQOtuD9OaysekdlMWWWcaIrIqNDlx3Pc7Fibb4HrrTlf13ksmnDeuZRL5pj6VelA92EMt5ooWw5soo9pTgq7jIvVnixDZIQFGflZ770NMbW_cuwWg1q5vBN-VJ7Q2MJIU3SpzUxsKpYuAQDHCsBEypC6OJJkaO-q9WK9YRZIpQUsvYG7pmcm/w598-h640/Horario%20de%20Globos%20B%C3%A1sico%20(1).jpg" width="598" />
+    </a>
+  </div>
+
+  <p>Aprovecha esta oportunidad y aprende —gratuitamente— el arte de crear flores hechas con globos.</p>
+  
+  <div>Te abrazo con cinta doble faz,</div>
+  <div>—🎈 Clara Martínez</div>
+  </article>
+</div>
+  
+  
+  
+  
+
+<div id="bloque-fase-2" style="display: none;">
+
+  <div  class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+      <img alt="Portada Flores con Globos" height="360" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIAO3oiYtxis_m798bGSpc0Vh0UmSn_JPUhJp58pT3fI_DfEdIPyOsR9kBkWmOOkcqU3RKrCO3SWodKIJdx0ZIB1LZusLKh8Jhm39ChGxRIi7TDYrmhDz_f7QFMJ3HkNP0nWLTrnfNk9SYdMLrjkYIUPBPFtsE1dtLjX_ZYexdyXOuY7XUr0n40-e4W1bP/w640-h360/PORTADA%20FLORES%20CON%20GLOBOS.jpg" width="640" />
+    </a>
+  </div>
+  
+  <br />
+
+  <h2>📚 ¿Qué Hace Tan Especial a Esta <i>Masterclass</i> —que Casi Nadie Enseña—?</h2>
+  <p>Que finalmente puedes aprender una habilidad que <u>muy pocas</u> personas dominan: <br /></p>
+  <p><b>Diseñar, dar forma y crear impresionantes flores... hechas completamente a partir de globos.</b></p>
+  <p>Sin necesidad de tener experiencia previa.</p>
+  <p>Ideal si quieres sorprender a familiares o amigos, crear decoraciones impactantes o generar ingresos extras con creaciones que parecen mágicas.</p>
+
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+      <img alt="Decoracion de flores con globos" border="0" data-original-height="1042" data-original-width="960" height="640" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjls63Qv0cuCyCgDSerlR6J5zjuflN4D0e5_j9K5cZoQGEj44fYxILeqE4oRwwTAr1le2sZ0n4uRth8DKsdPYWPKEVJdgqVNpewTAwh45IdpRP6Fg35pev3qPByHzPMyBjWKBj59iinrKpXAhn66ii29rknNqvjR8kutDbsyweD3K-F6t895j50kaCITUI/w590-h640/photo_2025-04-25_15-55-01.jpg" width="590" />
+    </a>
+  </div>
+  
+  <h2>💌 ¿Te gustaría recibir más secretos, tutoriales y oportunidades exclusivas sobre decoración?</h2>
+  <p>Al terminar esta clase, puedo enviarte consejos diarios que no comparto en ningún otro lado.</p>
+  <p>Únete gratis a nuestro <b>Círculo de Creadoras Imperiales</b> haciendo clic aquí 👇:<br /></p>
+  
+  <div style="text-align: center;">
+    <button id="boton-verde" onclick="window.open('https://imperiodecorativo.substack.com/subscribe?utm_source=menu&amp;simple=true', '_blank')" style="background-color: lime; border-radius: 8px; border: none; color: #212121; cursor: pointer; font-size: 1.2em; padding: 1em 1.5em;">
+      ✉️ <b>¡Quiero tus mejores consejos diarios!</b>
+    </button>
+  </div>
+  
+  <p><i>(Solo asegúrate de confirmar tu email después de suscribirte. Si no ves el correo de confirmación en tu Bandeja de Entrada, revisa tu carpeta de Spam o Promociones.)</i></p>
+  
+  <br />
+  
+  <div>Te abrazo con cinta doble faz,</div>
+  <div>—🎈 Clara Martínez</div>
+  
+</div>
+
+
+
+
+
+<div id="bloque-fase-3" style="display: none;">
+
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+      <img border="0" data-original-height="1200" data-original-width="1200" height="640" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgW8JrNwNC4UYq4zyCC5iqPykFUIBAoWtVEo9GZfjyTfoaYjhSOohnd6SYvrUh-lo0vGGcTyXLOjiX-4Fz1V4rsLVayenbiySaMtC1S7EMoWY-uO47an7vii3y_qm6LSzWdi59KRyGfx_R1tZznEsOZRrs4IugPl0AFq3MqOZIOQ_9Rxech4A4az_IqgNs/w640-h640/Portada%20Curso%202.jpeg" width="640" />
+    </a>
+  </div>
+  
+  <br />
+  
+  <p>🌸 Aprende a crear flores con globos que parecen sacadas de un cuento —aunque nunca hayas tocado un globo antes—.</p>
+  <p>Desde casa, a tu ritmo y sin complicaciones.</p>
+  <p><b>Convierte tu creatividad en arreglos que impactan y que tus clientes DESEAN tener en sus eventos.</b></p>
+  
+  <p id="precio-regular" style="text-align: center;"></p> <!--Variable con fórmula, ¡¡¡NO TOCAR!!!-->
+  <p id="precio-oferta" style="text-align: center;"></p> <!--Variable con fórmula, ¡¡¡NO TOCAR!!!-->
+  
+  <p style="text-align: center;">🔑 Tienes Acceso Inmediato, de Por Vida y con Soporte incluido</p>
+  
+  <p style="text-align: center;"><b>🟢 Accede ahora haciendo clic en el enlace de aquí abajo 👇</b></p>
+
+  <p class="enlace-venta" style="text-align: center;"></p>
+
+  <p style="text-align: center;">(Cuando compres, escribe bien tu correo. Sin espacios antes ni después, sin comas raras y sin ese «gmail.con» que más de una ha escrito sin querer.)</p>
+
+  <p id="texto-fecha-3" style="text-align: center;"></p>
+  
+  <p style="text-align: center;">Esta promo desaparecerá en:</p>
+
+  <!--CONTADOR 3-->
+  <div class="caja-contador" id="contenedor-cajas-3">
+    <div class="caja dias"><div class="valor">0</div><div>Días</div></div>
+    <div class="caja horas"><div class="valor">0</div><div>Horas</div></div>
+    <div class="caja minutos"><div class="valor">0</div><div>Minutos</div></div>
+    <div class="caja segundos"><div class="valor">0</div><div>Segundos</div></div>
+  </div>
+
+  <p>Querida Creativa,</p>
+  <p>Todo empieza con una flor... hecha con globos. Y sí, suena simple. Hasta que la ves terminada y no puedes dejar de mirarla.</p>
+  <p>¿Te gustaría saber cómo se hace? ¿Por qué encanta? ¿Y cómo «casi» se vende sola?</p>
+  <p>Aquí te lo mostramos paso a paso. Sin misterios, sin vueltas, sin depender de la «suerte» ni del «talento nato».</p>
+  <p><b>Y no importa si NUNCA inflaste un globo en toda tu vida.</b></p>
+  <p>Te damos todo: clases, comunidad, soporte, actualizaciones —entre un MONTÓN de otros beneficios—.</p>
+  <p>Nunca más frustrarte buscando vídeos sueltos que NO explican EN DETALLE y PROFUNDIDAD las técnicas para crear estos arreglos con globos.</p>
+  <p>Nosotras ponemos el camino, la experiencia y la estructura... y tú pones las manos, la creatividad y el ritmo.</p>
+  <p>Y cuando vendas tu primer arreglo… sólo te pido que me compartas tu opinión sincera sobre tu experiencia con este curso. ¿Te parece justo?</p>
+  <p>Ahora solo falta una decisión: ¿vas a seguir mirando, o vas a empezar a hacer?</p>
+  
+  <p>🟢 Si ya lo tienes claro, ingresa directamente al taller clicando el enlace de aquí abajo 👇:</p>
+  <p class="enlace-venta"></p>
+
+  <!-- <div style="text-align: center;">
+    <iframe allow="autoplay" height="400" src="https://drive.google.com/file/d/17g6RSehDn1mpnpQmRCMDduIVvM-ybuGV/preview" style="clear: both; text-align: center;" width="640">
+    </iframe>
+  </div> -->
+
+  <h2>💡 Lo que incluye tu acceso:</h2>
+  <p>💻<b>&nbsp;Aprende Paso a Paso, Sin Perderte en Tutoriales Sueltos:</b></p>
+  <p>Nunca más vas a estar dando vueltas por YouTube buscando: «cómo se hace esa flor de pétalos gorditos» a las 11 de la noche.</p>
+  <p>Recibe acceso inmediato a más de 10 horas de contenido práctico, claro y organizado en 6 módulos y 31 vídeos.</p>
+  <p>Cada clase está pensada como parte de un mapa con un camino claro. Donde aprendes desde cero, sigues una secuencia lógica y ves cómo tu habilidad crece con cada clase.</p>
+  
+  <br />
+
+  <p><b>📲 Acceso Sin Límites, Desde Cualquier Lugar y en Cualquier Momento:</b></p>
+  <p>Accede desde tu celular, tablet o computadora —incluso sin Internet, previa descarga—. Y lleva tus clases a donde vayas. A tu sala, tu taller o a tu descanso en el trabajo. Y míralas pulsando un botón. Esto se adapta a ti, y NO al revés.</p>
+    
+  <br />
+
+  <p><b>⏳ Avanza a tu Ritmo, Sin Presiones ni Horarios Rígidos:</b></p>
+  <p>¿Tienes 15 minutos en la mañana mientras doblas tu ropa? Genial. ¿Puedes avanzar 1 hora en la noche mientras todos duermen? Perfecto.</p>
+  <p>Aquí NUNCA «pierdes clases». Todo el contenido está disponible para ti las 24 horas del día, los 7 días de la semana. Lo importante es que no pares.</p>
+    
+  <br />
+
+  <p><b>♻️ Repite las clases cuantas veces necesites</b></p>
+  <p>¿No quedó algo claro? ¿Quieres perfeccionar una técnica? ¿O simplemente tuviste que apagar todo porque llegó una visita inesperada? Tranquila.</p>
+  <p>Aquí puedes pausar, retroceder, adelantar, cambiar la velocidad y repetir. Una, cinco, veinte o las veces que tú quieras. Porque esto no se trata de memorizar. Sino de integrar, practicar y volver cuando lo necesites.</p>
+  
+  <br />
+  
+  <p>🤝<b> Apoyo Real por WhatsApp — No Estás Sola</b></p>
+  <p>Te soy honesta: no todo saldrá perfecto al primer intento. Y ahí es cuando aparece el botón de WhatsApp.</p>
+  <p>¿Te trabaste? Preguntas. ¿Te salió chueco? Envíanos foto. ¿Dudas si vas bien? Te lo decimos.</p>
+  <p>Esto es comunidad. Respaldo. Tribu. Aquí aprender no significa aislarse. Sino tener a alguien que te diga: «Vas bien. Sigue. Estamos contigo.».</p>
+  
+  <br />
+ 
+  <p>🔒<b> Una Sola Inversión, Acceso de Por Vida y Actualizaciones Incluidas</b></p>
+  <p>Este taller no caduca nunca, no se acaba, ni tiene fecha de vencimiento. Tienes acceso ilimitado, para siempre.</p>
+  <p>Tampoco hay nada de pagos recurrentes, ni «plan platino diamante ultra plus», ni pagos escondidos. Inviertes <u>una sola vez</u>, y es tuyo, para toda la vida.</p>
+  <p>Además, cada actualización que se sume al taller, también es tuya. Automáticamente. Sin pagar ni un centavo más.</p>
+  
+  <br />
+
+  <p class="texto-precios-2"></p> <!--VARIABLE CON FÓRMULA, NO TOCAR-->
+  <p class="enlace-venta"></p>
+
+  <br />
+    
+  <h2>👀 Conoce la plataforma por dentro:</h2>
+  
+  <div class="separator" style="clear: both; text-align: center;">
+    <object class="BLOG_video_class" contentid="e037edaff89fb388" height="266" id="BLOG_video-e037edaff89fb388" width="320">
+    </object>
+  </div>
+  
+  <br />
+  
+  <h2>🎁 Bonos por lanzamiento:</h2>
+  
+  <div><b>✅ Certificado de participación</b></div>
+  <ul><li>Para mostrar tu progreso con orgullo (¡y sumar a tu portafolio!)</li></ul><br />
+
+  <div><b>✅ Acceso a nuestra Plataforma Educativa</b></div>
+  <ul><li>Donde puedes ver todas tus clases y avances desde un solo lugar</li></ul><br />
+
+  <div><b>✅ 3 Libros Digitales</b></div>
+  <ul><li>Con ideas, tips y técnicas extra para complementar tu formación</li></ul><br />
+
+  <div><b>✅ Aplicativo Hotmart para móvil</b></div>
+  <ul><li>Lleva tus clases contigo a donde vayas</li></ul><br />
+
+  <div><b>✅ Comunidad «Samantha» en WhatsApp</b></div>
+  <ul><li>Acompañamiento real con personas que están en lo mismo que tú</li></ul><br />
+
+  <div><b>✅ Catálogo Creativo</b></div>
+  <ul><li>Modelos e ideas listas para inspirarte o mostrar a clientes</li></ul><br />
+
+  <div><b>✅ Manual de Objeciones</b></div>
+  <ul><li>Aprende a responder a frases como «está caro» sin sudar frío</li></ul><br />
+  
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+      <img border="0" data-original-height="720" data-original-width="1280" height="360" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVZcSXPGfaeldTbJfgFjIwYU2aCtnxi2CK6LcinmDih_AnbRn9-4wOa9K-PEAFX9UzfTs2UYW_SeCs6jMN29fnxDkbHkX5PSEZt1irlokRgK_kUAF4k9_rNnWNrIwfiLmWxAhtF-DxPNAKrjS8LpffhfZL_HE2rUUPYZvgEPi_P95mdDrwYgcBgKVUU4w/w640-h360/WhatsApp%20Image%202025-01-31%20at%208.19.47%20AM%20(2).jpeg" width="640" />
+    </a>
+  </div>
+
+  <h2><b>⚡️ Bonos de Acción Rápida:</b></h2>
+  
+  <br />
+  
+  <div><b>💐 Proyecto Bouquet de Flores</b></div>
+  <ul><li>Un proyecto listo para aplicar y vender</li></ul><br />
+
+  <div><b>🎥 1 Clase en vivo</b></div>
+  <ul><li>Para resolver dudas en tiempo real y aprender algo extra</li></ul><br />
+
+  <div><b>🌸 Proyecto Ramo de Flores</b></div>
+  <ul><li>Aprende un diseño especial que por sí solo ya vale el taller</li></ul><br />
+  
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+      <img border="0" data-original-height="338" data-original-width="600" height="360" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUMORJ5i9Hoo81aNMGCT41VVlCPq83ytX9R2q5IoJt8cuk8tEKfwq1QMw9-0KtVmgX6OSfPuT0VI2NfUMAPdgE-W7d0HJcRS8E0deoG5jGwxXEvXy6oicXAOqNFXf2KI-8D6aEOKzL-S9LsOQq8QTMn9uGiRG0gBHfGrBEf4yYMUUvLOeJTEhcROX0XQk/w640-h360/WhatsApp%20Image%202025-01-31%20at%208.24.23%20AM.jpeg" width="640" />
+    </a>
+  </div>
+
+  <p id="texto-precios-1"></p> <!--VARIABLE CON FÓRMULA, NO TOCAR-->
+  <p>(No hay mensualidades, ni cobros escondidos, ni “planes premium”.)</p>
+  <p><b>Inviertes una sola vez y es tuyo para siempre.</b></p>
+  <p class="texto-precios-2"></p> <!--VARIABLE CON FÓRMULA, NO TOCAR-->
+  <p class="enlace-venta"></p>
+
+  <br />
+
+  <h2><b>🎥 Lo que dicen quienes ya se animaron:</b></h2>
+
+  <div class="separator" style="clear: both; text-align: center;">
+    <object class="BLOG_video_class" contentid="1c59c1bf69f11ea5" height="266" id="BLOG_video-1c59c1bf69f11ea5" width="320">
+    </object>
+  </div>
+  
+  <br />
+  
+  <p>«Había visto muchas cosas, pero no sabía cómo hacerlas. Ahora, he aprendido muchas técnicas y me ha quedado todo muy claro.»</p>
+  <p style="text-align: right;">Elena Saá, Chile</p>
+
+  <p><b>«Me ha encantado porque lo enseñas de forma profesional. Manejas el sistema de costos, enseñas cómo hacer la estructura y me has dado muchas herramientas prácticas.»</b></p>
+  <p style="text-align: right;"><b>Adriana Gutiérrez, México</b></p>
+  
+  <p>«Lo que más me gustó es que nos das todos tus secretos.»</p>
+  <p style="text-align: right;">Janet Castillo, EEUU</p>
+
+  <br />
+  
+  <p class="texto-precios-2"></p> <!--VARIABLE CON FÓRMULA, NO TOCAR-->
+  <p class="enlace-venta"></p>
+
+  <br />
+
+  <h2><b>❓Preguntas Frecuentes:</b></h2>
+
+  <p><b>🔹 ¿Este curso es presencial o a distancia?</b></p>
+
+  <p>Este taller es 100% online. Desde donde estés, como estés. Aunque estés en pijama, con el bebé en brazos o las tostadas quemándose. Tú pones el horario, nosotros las herramientas.</p><br />
+
+  <p><b>🔹 ¿Puedo ver las clases a cualquier hora?</b></p>
+
+  <p>¡Por supuesto! Las clases quedan grabadas, así que si una vecina se te aparece con drama justo cuando ibamos a inflar el globo número 38… ¡no pasa nada! Vuelves, retrocedes y continúas.</p><br />
+
+  <p><b>🔹 ¿Desde qué dispositivos puedo acceder?</b></p>
+
+  <p>Desde el celular, la compu, la tablet, o incluso desde un microondas con Wi-Fi (si lo logras, mándame foto, porfa). Donde tengas pantalla, tienes tu taller.</p><br />
+
+  <p><b>🔹 ¿El acceso es para siempre o por tiempo limitado?</b></p>
+
+  <p>Tienes acceso de por vida. ¿Quieres volver a mirar una clase dentro de 2 meses? Puedes. ¿Dentro de 5 años? También. ¿Cuando ya seas una pro y quieras reírte de cómo inflabas el primer globo? Pues sí.</p><br />
+
+  <p><b>🔹 ¿Y si no me gusta? ¿O si me arrepiento?</b></p>
+
+  <p>Tienes 7 días completos desde tu compra para ver el contenido y decidir si esto es para ti. Si sientes que no te suma, no te gustó, o simplemente quieres devolverlo para comprarte una pizza… aplicas nuestra <b>Garantía de Satisfacción Total</b>, y te devolvemos hasta el último centavo. Sin dramas. Sin preguntas.</p><br />
+
+  <p><b>🔹 ¿Qué pasa después de que hago la compra?</b></p>
+
+  <p>En este vídeo, Paola te explica fácilmente cómo ingresas a tu nuevo curso 👇...</p>
+
+  <div class="separator" style="clear: both; text-align: center;">
+    <object class="BLOG_video_class" contentid="025ecb6271da6fb4" height="266" id="BLOG_video-025ecb6271da6fb4" width="320">
+    </object>
+  </div>
+  
+  <br />
+
+  <h2>✅ Entonces, ¿lista para dejar de ver y empezar a crear?</h2>
+
+  <p id="texto-precios-3"></p> <!--VARIABLE CON FÓRMULA, NO TOCAR-->
+  <p class="enlace-venta"></p>
+
+  <br />
+
+  <p>Si estás aquí, es por algo.</p>
+  <p>No lo ignores.</p>
+  <p>Ese enlace puede ser el primer paso no solo para transformar tus decoraciones... sino tu confianza y tus ingresos.</p>
+
+  <br />
+
+  <div>Te abrazo con cinta doble faz,</div>
+  <div>—🎈 Clara Martínez</div>
+
+  <br />
+
+  <p id="texto-fecha-4"></p>
+  <p>Aprovecha esta oportunidad e ingresa ahora haciendo clic aquí 👇:</p>
+  <p class="enlace-venta"></p>
+
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="javascript:void(0);" style="cursor: default; pointer-events: none;">
+        <img border="0" data-original-height="1200" data-original-width="1200" height="320" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEheDuOU5z2-_3Kq3LdAwXNVouN-t2TrB85Nw2GZV6JbAJBltMrn_esPmPGMl1jRVKbEZnEsPYmmZrWdp_gkhrbXOwt5uZ1evgdLqkNL5ilRt2qzOtkIcVVL8FLruCEoEGoetJmtgzyoAkyIeWLClkIBWMVP_tMscIMcOp-BVvQvkXKi0eL-yLYoNKW2Ijo/s320/Portada%20Curso%201.jpeg" width="320" />
+      </a>
+    </div>
+    
+  </div>
+</div>
+
+
+
+
+
+<!-- <script src="https://script.google.com/macros/s/AKfycbzZGxX5daHXJyJ5ASBa5Ark4WgEuMJ5yBKSUxi0x_EPnVTKu4TT1Q6XCwamXNolZu_B/exec"></script> -->
+
+<script>
+  
+  const ACTIVO = "Conviértete en Experta en Flores con Globos";
+
+  const ENLACES = {
+  claseEnVivo: "https://www.youtube.com/watch?v=H9C5z6U1mVU",
+  claseEnVivoIDYT: "H9C5z6U1mVU",
+  repeticionSabado: "", // https://www.youtube.com/watch?v=udmXPEycWTE
+  repeticionSabadoIDYT: "", // udmXPEycWTE
+  grabacionDomingo: "", // https://aifreevideo.com/
+  grabacionDomingoIDYT: "", // sd50Qk-oSCU
+  enlaceVenta: "https://go.hotmart.com/F99188024H?ap=fc8a"
+  };
+
+  const TALLER = {
+  nombreTaller: "«Flores con Globos por Samantha»"
+  };
+
+  const FECHAS = {
+  fase2: new Date(2025, 4, 29, 16, 22),
+  fase3: new Date(2025, 4, 29, 16, 24),
+  fase4: new Date(2025, 4, 30, 0, 0),
+  finClaseEnVivo: new Date(2025, 4, 29, 16, 25),
+  previaReplay: new Date(2025, 4, 29, 16, 26),
+  finReplay: new Date(2025, 4, 29, 16, 28),
+  contador1: "May 19, 2025 16:23:00",
+  contador2: "May 29, 2025 16:27:00",
+  contador3: "May 30, 2025 00:00:00",
+    textos: {
+  claseFecha1: "Este viernes 16 de mayo de 2025 - 9:10 a.m. (hora Perú)",
+  claseFecha2: "Viernes 16 de mayo de 2025",
+  claseFecha3: "el viernes 16 de mayo de 2025 a la medianoche",
+  claseFecha4: "📍 Viernes 16 de mayo - 9:10 a.m. Perú"
+    }
+  };
+
+  const PRECIOS = {
+  regular: "197",
+  oferta: "39"
+  };
+
+  const momentosDeRecarga = [
+  new Date(2025,4,16,0,0),
+  new Date(2025,4,17,0,0),
+  new Date(2025,4,18,0,0)
+  ];
+   
+  
+  // ============ FUNCIONES UTILITARIAS GLOBALES ============
+  
+  function slugify(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")                         // separa tildes
+    .replace(/[\u0300-\u036f]/g, "")          // elimina tildes
+    .replace(/[^a-z0-9\s-]/g, "")             // permite letras, números, guiones y espacios
+    .replace(/\s+/g, "-")                     // espacios normales → guión
+    .replace(/-+/g, "-")                      // reemplaza múltiples guiones por uno solo
+    .replace(/^-|-$/g, "");                   // limpia guiones al inicio o fin
+}
+
+
+  
+  // ============ VALOR LOCAL PARA COMPARACIÓN ============
+  // const entradaActual = "Conviértete en Experta en Flores con Globos";
+ /* const entradaActual = document.title || "pagina-desconocida";
+
+  // ============ FUNCIÓN PARA ESPERAR CONSTANTES Y EJECUTAR LÓGICA PRINCIPAL ============
+  function esperarConstantesYEjecutar() {
+    
+    let intentos = 0;
+    const maxIntentos = 50; // Esperar un máximo de 5 segundos (50 * 100ms)
+
+    const intervalo = setInterval(() => {
+      // Verificar si todas las constantes necesarias están definidas
+      if (
+        typeof ACTIVO !== "undefined" &&
+        typeof ENLACES !== "undefined" &&
+        typeof FECHAS !== "undefined" &&
+        typeof TALLER !== "undefined" &&
+        typeof PRECIOS !== "undefined" &&
+        typeof momentosDeRecarga !== "undefined"
+      ) {
+        clearInterval(intervalo); // Detener el intervalo, constantes cargadas
+
+        // Ahora comprobamos ACTIVO
+       
+        if (slugify(ACTIVO) === slugify(entradaActual)) {
+          ejecutarScriptPrincipal(); // Llamar a la función que contiene TODO tu script
+        } else {
+       
+          console.warn("Redirigiendo automáticamente al activo: " + slugify(ACTIVO));
+  window.location.href = "/p/" + slugify(ACTIVO) + ".html";
+        }
+      } else {
+        intentos++;
+        if (intentos >= maxIntentos) {
+          clearInterval(intervalo);
+          console.error("❌ No se cargaron todas las constantes necesarias desde la nube después de " + maxIntentos + " intentos. Abortando.");
+          // Aquí podrías manejar el error, quizás mostrar un mensaje al usuario.
+        }
+      }
+    }, 100);
+  }
+
+  // ============ TODO TU SCRIPT PRINCIPAL VA AQUÍ ADENTRO ============
+  function ejecutarScriptPrincipal() { */
+    console.log("🧠 Ejecutando Script Principal...");
+
+    // ---------- DEFINICIÓN DE TODAS LAS FUNCIONES ----------
+    
+    // CONTADORES
+    function iniciarContador(idCaja, fechaLimite) {
+      
+      const countDownDate = new Date(fechaLimite).getTime();
+    
+      const intervalo = setInterval(function () {
+        const now = new Date().getTime();
+        const distancia = countDownDate - now;
+
+        if (distancia < 0) {
+          clearInterval(intervalo);
+          const el = document.getElementById(idCaja);
+          if (el) {
+            el.style.display = "none";
+            el.setAttribute("data-expirado", "true");
+          }
+          return;
+        }
+
+        const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+        
+        // ✅ Contador 1 (formato compacto: 2d 4h 5m 09s)
+        if (idCaja === "contenedor-cajas-1") {
+          const span = document.getElementById("contador1-tiempo");
+          if (span) {
+            const segundosFormateados = segundos < 10 ? "0" + segundos : segundos;
+            span.innerText = `${dias}d ${horas}h ${minutos}m ${segundosFormateados}s`;
+            document.getElementById("fixed-button").style.display = "block";
+          
+          } else {
+            clearInterval(intervalo);
+          }
+
+          // ✅ Solo cancelamos el contador si ya terminó, sin tocar el botón ni contenido
+          if (distancia < 0) {
+            clearInterval(intervalo);
+            const el = document.getElementById(idCaja);
+            if (el) {
+              el.style.display = "none";
+              el.setAttribute("data-expirado", "true");
+            }
+
+            // 🧼 Ya no forzamos ningún cambio de texto ni color acá.
+            // ✅ `actualizarFixedButton()` se encargará en el próximo ciclo
+
+            return;
+          }
+        }
+
+        // ✅ Contador 2 (formato: 4h 5m 09s)
+        else if (idCaja === "contenedor-cajas-2") {
+          const span = document.querySelector(`#${idCaja} #contador2-tiempo`);
+          if (span) {
+            const segundosFormateados = segundos < 10 ? "0" + segundos : segundos;
+            span.innerText = `${horas}h ${minutos}m ${segundosFormateados}s`;
+          } else {
+            clearInterval(intervalo);
+          }
+        }
+
+        // ✅ Contadores clásicos (con estructura en divs)
+        else {
+          const diasEl = document.querySelector(`#${idCaja} .dias .valor`);
+          const horasEl = document.querySelector(`#${idCaja} .horas .valor`);
+          const minutosEl = document.querySelector(`#${idCaja} .minutos .valor`);
+          const segundosEl = document.querySelector(`#${idCaja} .segundos .valor`);
+          if (!diasEl || !horasEl || !minutosEl || !segundosEl) {
+            clearInterval(intervalo);
+            return;
+          }
+
+          diasEl.innerText = dias;
+          horasEl.innerText = horas;
+          minutosEl.innerText = minutos;
+          segundosEl.innerText = segundos < 10 ? "0" + segundos : segundos;
+        }
+      }, 1000);
+    }
+    
+    // 🕒 FUNCIÓN PARA MOSTRAR EL CONTADOR 2 SOLO EN LA FASE PERMITIDA
+    function mostrarContador2(fase) {
+      
+      const ahora = new Date().getTime();
+      const finClase = new Date(FECHAS.finClaseEnVivo).getTime(); // 🛑 Fin de clase en vivo
+      const limite = new Date(FECHAS.contador2).getTime(); // ⏳ Hora de inicio del replay
+      
+      const contenedor = document.getElementById("contenedor-cajas-2");
+      if (!contenedor) return;
+    
+      // 🧠 Reforzamos con condición de fase: solo permitimos si la fase NO es "oculto"
+      if (fase !== "oculto" && ahora >= finClase && ahora < limite) {
+        contenedor.style.display = "block"; // ✅ Mostramos solo en la franja válida
+
+        // 🕓 Si aún no expiró, iniciamos el contador
+        if (!contenedor.hasAttribute("data-expirado")) {
+          iniciarContador("contenedor-cajas-2", FECHAS.contador2);
+        }
+  
+      } else {
+        // ❌ Fuera de la franja o en fase "oculto", ocultamos
+        contenedor.style.display = "none";
+      }
+    }
+
+    // FUNCIÓN MOSTRAR CONTENIDO
+    function mostrarContenido() {
+     
+      // 💣 RECARGA AUTOMÁTICA EN FECHAS PREDEFINIDAS (hace un "F5 remoto" según la hora local de la PC del visitante).
+      // Utiliza la constante GLOBAL "momentosDeRecarga" también
+    
+      const ahora = new Date();
+      const yaRecargadoHoy = localStorage.getItem("recargaHoy");
+    
+      // Compara solo día, mes y año (ignora hora)
+      const esMismoDia = (a, b) =>
+      a.getFullYear() === b.getFullYear() &&
+            a.getMonth() === b.getMonth() &&
+            a.getDate() === b.getDate();
+
+      for (let momento of momentosDeRecarga) {
+        if (esMismoDia(ahora, momento) && yaRecargadoHoy !== ahora.toDateString()) {
+          console.log("🔄 Recarga programada: ejecutando F5");
+          localStorage.setItem("recargaHoy", ahora.toDateString());
+          location.reload();
+          return; // 🛑 Detenemos resto de la función hasta que se recargue
+        }
+      } 
+  
+      let faseMostrada = "";
+      let faseVideo = "oculto"; // valor por defecto
+
+      // Ocultar todos los bloques antes de mostrar el correspondiente
+      document.getElementById("bloque-fase-1").style.display = "none";
+      document.getElementById("bloque-fase-2").style.display = "none";
+      document.getElementById("bloque-fase-3").style.display = "none";
+
+      if (ahora < FECHAS.fase2) {
+        faseMostrada = "bloque-fase-1";
+        faseVideo = "oculto";
+      
+      } else if (ahora >= FECHAS.fase2 && ahora < FECHAS.fase3) {
+        faseMostrada = "bloque-fase-2";
+        faseVideo = "claseEnVivo";
+      
+      } else if (ahora >= FECHAS.fase3 && ahora < FECHAS.finClaseEnVivo) {
+        faseMostrada = "bloque-fase-3";
+        faseVideo = "claseEnVivo";
+      
+      } else if (ahora >= FECHAS.finClaseEnVivo && ahora < FECHAS.finReplay) {
+        faseMostrada = "bloque-fase-3";
+        faseVideo = "repeticionSabado";
+      
+      } else if (ahora >= FECHAS.finReplay && ahora < FECHAS.fase4) {
+        faseMostrada = "bloque-fase-3";
+        faseVideo = "grabacionDomingo";
+      
+      } else {
+        // 🔀 Redirección final
+        window.location.href = "https://imperiodecorativo.blogspot.com/2025/04/letras-y-numeros-con-luces.html";
+        return;
+      }
+
+      // 🧹 Limpiar título si estamos ya en la fase 3 o más
+      const tituloClase = document.getElementById("titulo-clase");
+      if (tituloClase) {
+        if (ahora >= FECHAS.fase3) {
+          tituloClase.style.display = "none";
+        } else {
+          tituloClase.style.display = "block";
+        }
+      }
+
+      // ✅ Mostrar el bloque de fase actual
+      document.getElementById(faseMostrada).style.display = "block";
+      
+      // 👀 Scroll si cambió de fase
+      if (window.__ultimaFaseMostrada !== faseMostrada) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.__ultimaFaseMostrada = faseMostrada;
+      }
+
+      // 📦 Ejecutar módulos visuales correspondientes
+      mostrarVideo(faseVideo);
+      mostrarTexto(faseVideo);
+      mostrarEnlace(faseVideo);
+      mostrarChat(faseVideo);
+      mostrarContador2(faseVideo);
+      actualizarFixedButton();
+    }
+ 
+    
+    function mostrarTexto(fase) {
+      const texto = document.getElementById("texto-video");
+      if (!texto) return;
+
+      texto.style.display = "block";
+
+      if (fase === "claseEnVivo") {
+        texto.innerHTML = "📺 ¿Quieres comentar o verlo en YouTube? Pulsa el enlace de aquí abajo 👇";
+      } else if (fase === "repeticionSabado") {
+        const ahora = new Date();
+        if (ahora < FECHAS.previaReplay) {
+          texto.innerHTML = `🎬 El replay estará disponible<br>${FECHAS.textos.claseFecha4}`;
+        } else if (ahora >= FECHAS.previaReplay && ahora < new Date(FECHAS.contador2)) {
+          texto.innerHTML = `🎬 ¡Prepárate! Replay disponible muy pronto`;
+        } else {
+          texto.innerHTML = "🎬 Replay disponible. ¿Quieres comentar o verlo en YouTube? Pulsa el enlace de aquí abajo 👇";
+        }
+      } else if (fase === "grabacionDomingo") {
+        const yaExisteGrabacion =
+              ENLACES.grabacionDomingo || ENLACES.grabacionDomingoIDYT;
+
+        if (yaExisteGrabacion) {
+          texto.innerHTML = `🎞️ Grabación disponible únicamente hasta ${FECHAS.textos.claseFecha3}`;
+        } else {
+          texto.innerHTML = "🎞️ La grabación estará disponible aquí muy pronto. ¡Vuelve más tarde!";
+        }
+      }
+
+      else {
+        texto.style.display = "none"; // fase "oculto" u otras
+      }
+    }
+  
+    
+    function mostrarEnlace(fase) {
+      
+      const enlace = document.getElementById("enlace-video");
+      if (!enlace) return;
+
+      const href = ENLACES[fase]; // Enlace directo (por ejemplo, hotlink al sitio externo)
+      const existeIDYT = ENLACES[`${fase}IDYT`]; // Si existe un ID de YouTube para insertar
+
+      const ahora = new Date(); // Hora actual para verificar condiciones
+
+      // 🔍 Esta variable decide si podemos mostrar el enlace en pantalla
+      const puedeMostrar =
+            fase === "claseEnVivo" || // Siempre mostramos durante el en vivo
+            (fase === "repeticionSabado" && ahora >= FECHAS.previaReplay) || // Solo mostramos replay cuando ya se desbloqueó
+            (fase === "grabacionDomingo" && ahora >= FECHAS.finReplay); // Mostramos grabación solo después del replay
+
+      // ✅ Si podemos mostrar, y hay algún enlace válido, se muestra
+      if (puedeMostrar && (href || existeIDYT)) {
+        enlace.href = href;
+        enlace.innerText = href;
+        enlace.style.display = "inline-block";
+      
+      } else {
+        // ⛔ Si no, ocultamos el enlace
+        enlace.style.display = "none";
+      }
+    }
+  
+    // FUNCION MOSTRAR VÍDEO DINÁMICO SEGÚN LA FASE ACTUAL
+    window.__ultimaFaseVideoMostrada = null;
+
+    function mostrarVideo(fase) {
+      
+      const bloque = document.getElementById("bloque-video-dinamico");
+      if (!bloque) return; // 🛑 Si no hay contenedor, salimos
+
+      const ahora = new Date(); // 🕒 Hora actual para validaciones de tiempo
+ 
+      // 🔍 Buscamos si existe un ID de YouTube o un enlace directo (hotlink)
+      const idYT = ENLACES[`${fase}IDYT`];
+      const hotlink = ENLACES[fase];
+
+      // 🧠 Lógica para decidir SI MOSTRAMOS el video según la fase y el tiempo
+      const puedeMostrar =
+            fase === "claseEnVivo" || // Siempre mostramos el en vivo mientras esté activo
+            (fase === "repeticionSabado" && ahora >= FECHAS.previaReplay) || // Solo mostramos replay cuando ya se desbloqueó
+            (fase === "grabacionDomingo" && idYT); // Mostramos grabación solo después del replay
+
+      // 🧠 Si la fase es la misma que la última mostrada, y ya estaba desbloqueada, no hacemos nada
+      if (window.__ultimaFaseVideoMostrada === fase && puedeMostrar) return;
+     
+      // ⚠️ Si la fase es la misma, pero AÚN no puede mostrarse, NO actualizamos ni salimos —seguimos intentando en el próximo intervalo
+      if (!puedeMostrar) {
+        bloque.innerHTML = "";
+        bloque.classList.remove("video-visible");
+        bloque.classList.add("video-oculto");
+        bloque.style.display = "none";
+        bloque.offsetHeight; // 🤓 Forzamos un reflow por si acaso
+        return;
+      }
+
+      // ✅ En este punto sí es una fase nueva O ya se desbloqueó → actualizamos la fase mostrada
+      window.__ultimaFaseVideoMostrada = fase;
+      
+      // ⛔ Si la fase es "oculto", ocultamos el bloque por completo
+      if (fase === "oculto") {
+        bloque.innerHTML = ""; // Limpiamos el contenido anterior
+        bloque.classList.remove("video-visible");
+        bloque.classList.add("video-oculto");
+        bloque.style.display = "none"; // Lo escondemos completamente
+        return;
+      }
+
+      // ❌ Si no hay ni ID de YouTube ni hotlink, no mostramos nada
+      if (!idYT && !hotlink) {
+        bloque.innerHTML = "";
+        bloque.classList.remove("video-visible");
+        bloque.classList.add("video-oculto");
+        bloque.style.display = "none";
+        bloque.offsetHeight;
+        return;
+      }
+
+      // ✅ Si tenemos un ID de YouTube, armamos el iframe
+      const parametrosYT = "?rel=0&enablejsapi=1";
+      const nuevoSrc = `https://www.youtube.com/embed/${idYT}${parametrosYT}`; // CORREGIDO: Usar www.youtube.com/embed/
+
+      bloque.innerHTML = ""; // Limpiamos por si había algo antes
+
+      // Creamos nuestra malla invisible para forzar que cliquen nuestro hotlink (Está sobre el vídeo de YT, y la usamos 1 sola vez cuando el visitante es nuevo o lo abre desde incógnito)
+      const iframe = document.createElement("iframe");
+      iframe.src = nuevoSrc;
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute("allowfullscreen", "");
+     
+      // 🔧 Estilos para que ocupe todo el bloque contenedor
+      iframe.style.position = "absolute";
+      iframe.style.top = "0";
+      iframe.style.left = "0";
+      iframe.style.width = "100%";
+      iframe.style.height = "100%";
+
+      bloque.appendChild(iframe); // Añadimos el iframe al DOM
+
+      // 🔒 Si aún no está desbloqueado, se añade la "malla" transparente encima
+      if (!localStorage.getItem("videoDesbloqueado")) {
+        const malla = document.createElement("div");
+        malla.id = "click-catcher";
+        malla.style.position = "absolute";
+        malla.style.top = "0";
+        malla.style.left = "0";
+        malla.style.width = "100%";
+        malla.style.height = "100%";
+        malla.style.zIndex = "9999";
+        malla.style.background = "transparent";
+        malla.style.cursor = "pointer";
+
+        // 🚀 Al hacer clic, dispara el hotlink en background y desbloquea el video
+        malla.addEventListener("click", () => {
+          const enlace = document.createElement("a");
+          enlace.href = hotlink;
+          enlace.target = "oculto"; // ⚠️ El enlace se abre en un target invisible
+          enlace.style.display = "none";
+          document.body.appendChild(enlace);
+          enlace.click();
+          document.body.removeChild(enlace); // Limpiar el enlace del DOM
+
+          // 🔓 Guardamos que el video ya fue desbloqueado
+          localStorage.setItem("videoDesbloqueado", "true");
+
+          // 🧹 Quitamos la malla de bloqueo
+          malla.remove();
+        });
+        bloque.appendChild(malla); // Añadimos la malla encima del iframe
+      }
+
+      // ✅ Mostramos finalmente el bloque de video correctamente
+      bloque.style.display = "block";
+      bloque.classList.remove("video-oculto");
+      bloque.classList.add("video-visible");
+    }
+
+    // MOSTRAR CHAT DE YOUTUBE SOLO EN FASES PERMITIDAS
+    window.__ultimaFaseChatMostrada = null;
+    function mostrarChat(fase) {
+      
+      const bloqueChat = document.getElementById("bloque-chat-dinamico");
+      
+      if (!bloqueChat) return; // 🛑 Si no hay contenedor, salimos
+
+      const ahora = new Date(); // 🕒 Hora actual
+      const idYT = ENLACES[`${fase}IDYT`]; // 🧠 Solo mostramos el chat si la fase lo permite y hay ID
+      const puedeMostrar =
+            fase === "claseEnVivo" || // ✅ En vivo siempre
+            (fase === "repeticionSabado" && ahora >= FECHAS.previaReplay); // ✅ Replay sólo después de cierta hora
+
+      // 🧠 Si no está permitido o es grabación del domingo, ocultamos
+      if (!puedeMostrar || fase === "grabacionDomingo" || !idYT) {
+        bloqueChat.innerHTML = "";
+        bloqueChat.style.display = "none";
+        return;
+      }
+
+      // 🧠 Si la fase no ha cambiado, no hacemos nada
+      if (window.__ultimaFaseChatMostrada === fase) return;
+     
+      // ✅ Fase válida → actualizamos
+      window.__ultimaFaseChatMostrada = fase;
+
+      const dominio = window.location.hostname; // Usar el hostname actual dinámicamente
+      
+      // Importante usar la siguiente estructura de URL para mostrar el chat.
+      // Al final agregamos "&dark_theme=1 para mostrar el chat en "modo oscuro"
+      
+      const chatURL = `https://www.youtube.com/live_chat?v=${idYT}&embed_domain=${dominio}&dark_theme=1`; // CORREGIDO: Usar URL de chat en vivo correcta y https
+
+      bloqueChat.innerHTML = `
+      <iframe frameborder="0" height="500" src="${chatURL}" width="100%"></iframe>
+      `;
+
+      bloqueChat.style.display = "block"; // ✅ Mostramos el chat
+    }
+  
+    function actualizarFixedButton() {
+      
+      const fixedButtonWrapper = document.querySelector(".fixed-button-wrapper");
+      const fixedButton = document.getElementById("fixed-button");
+      const contenido = document.getElementById("contenido-fixed-button");
+      const espaciador = document.getElementById("espaciador-boton");
+
+      if (!fixedButton || !contenido || !fixedButtonWrapper) return;
+
+      const ahora = new Date().getTime();
+      const t1 = new Date(FECHAS.contador1).getTime();
+      const t2 = new Date(FECHAS.fase3).getTime();
+
+      // LIMPIEZA
+      contenido.innerHTML = "";
+      fixedButton.onclick = null;
+      fixedButton.classList.remove("fixed-button-animation");
+      
+      // Limpiar clases de posición y color
+      fixedButtonWrapper.classList.remove("fijo", "estatico");
+      fixedButton.classList.remove("btn-verde", "btn-rojo");
+      
+      if (ahora < t1) {
+        fixedButtonWrapper.classList.add("fijo");
+        fixedButton.style.display = "block";
+        contenido.innerHTML = `⏳ COMENZAMOS EN: <span id="contador1-tiempo">0d 0h 0m 0s</span>`;
+        // iniciarContador("contenedor-cajas-1", FECHAS.contador1); // Esta instancia se inicia en DOMContentLoaded
+        // Mostrar espaciador
+        if (espaciador) espaciador.style.display = "block";
+
+      } else if (ahora >= t1 && ahora < t2) {
+        fixedButtonWrapper.classList.add("estatico");
+        fixedButton.style.display = "block";
+        fixedButton.classList.add("btn-verde"); // 👉 Verde para clase en vivo
+        contenido.innerHTML = "▶ LA CLASE COMENZÓ: PULSA PLAY";
+        // Ocultar espaciador para evitar doble espacio
+        if (espaciador) espaciador.style.display = "none";
+      
+      } else if (ahora >= t2) {
+        fixedButtonWrapper.classList.add("fijo");
+        fixedButton.style.display = "block";
+        fixedButton.classList.add("btn-rojo"); // 👉 Rojo para oferta
+        fixedButton.style.cursor = "pointer"; // ✅ cambia el cursor a manito
+
+        // Mostrar texto + enlace visible y clicable
+        contenido.innerHTML = `💥 OFERTA ACTIVA: ACCEDE AQUÍ  <a href="${ENLACES.enlaceVenta}" target="_blank" rel="nofollow" style="font-size: 16px; color: inherit; text-decoration: underline;">${ENLACES.enlaceVenta}</a>`;
+
+        
+        // Hacemos que TODO el botón sea clicable
+        fixedButton.onclick = () => {
+          window.open(ENLACES.enlaceVenta, "_blank");
+        };
+
+        // Mostrar espaciador
+        if (espaciador) espaciador.style.display = "block";
+
+      } else {
+        fixedButton.style.display = "none";
+      }
+    }
+  
+    
+    // FUNCION PARA ANIMAR FIXEDBUTTON
+    
+    let ultimaAnimacion = 0;
+    const COOLDOWN_MS = 10000; // 10 segundos de cooldown
+
+    function animarFixedButton() {
+      
+      const ahora = Date.now();
+      if (ahora - ultimaAnimacion < COOLDOWN_MS) return; // Evita animar si está en cooldown
+      ultimaAnimacion = ahora;
+      
+      const fixedButton = document.getElementById("fixed-button");
+      
+      if (!fixedButton) return;
+
+      fixedButton.classList.remove("fixed-button-animation");
+      void fixedButton.offsetWidth; // Reflow forzado
+      fixedButton.classList.add("fixed-button-animation");
+    }
+
+
+    // ---------- LÓGICA QUE SE EJECUTA CUANDO EL DOM ESTÁ LISTO ----------
+    // (Mueve aquí el contenido de tu antiguo listener DOMContentLoaded)
+    
+    function alCargarDOM() {
+      
+      console.log("🔧 DOM completamente cargado y script principal listo. Ejecutando lógica del DOM...");
+
+      // Textos de fechas
+      document.getElementById("texto-fecha-1").innerText = "📍 " + FECHAS.textos.claseFecha1 + " - En Vivo por YouTube";
+      document.getElementById("texto-fecha-2").innerHTML = "📅 <b>Cuándo: </b>" + FECHAS.textos.claseFecha2;
+      document.getElementById("texto-fecha-3").innerHTML = "⏳ <b>Oferta Especial disponible por <u>tiempo limitado</u>, únicamente hasta " + FECHAS.textos.claseFecha3 + "</b>";
+      document.getElementById("texto-fecha-4").innerHTML = "P.D.: 🕛 Recuerda que esta oferta termina " + FECHAS.textos.claseFecha3 + ".";
+
+      // Precios
+      document.getElementById("texto-precios-1").innerHTML = "🧨 <b>Y todo esto... por una modesta inversión de tan solo <strike>" + PRECIOS.regular + "</strike> " + PRECIOS.oferta + "</b>";
+      document.querySelectorAll(".texto-precios-2").forEach(e => e.innerHTML = "🟢 Accede ahora haciendo clic en el enlace de aquí abajo 👇:");
+      document.getElementById("texto-precios-3").innerHTML = "🟢 Accede ahora al Taller Completo de " + TALLER.nombreTaller + " por tan solo " + PRECIOS.oferta + " haciendo clic en el enlace de aquí abajo 👇:";
+   
+      // Precio final (fase 3)
+      document.getElementById("precio-regular").innerHTML = "💸 Precio regular: <strike>" + PRECIOS.regular + "</strike>";
+      document.getElementById("precio-oferta").innerHTML = "🎁 <b><u>OFERTA LIMITADA:</u> " + PRECIOS.oferta + " (o el equivalente en tu moneda local)</b>";
+      
+      // Enlace de venta
+      
+      if (ENLACES.enlaceVenta) {
+        document.querySelectorAll(".enlace-venta").forEach(el => {
+          el.innerHTML = `<a href="${ENLACES.enlaceVenta}" target="_blank" rel="nofollow">${ENLACES.enlaceVenta}</a>`;
+        });
+      }
+
+      // Mostrar fase y configurar actualizaciones periódicas
+      mostrarContenido();
+      setInterval(mostrarContenido, 30000); // Revisar cada 30 segundos
+
+      // Iniciar contadores
+      iniciarContador("contenedor-cajas-1", FECHAS.contador1); // Contador para fixed-button y bloque fase 1
+      // Asegúrate que `FECHAS.contador2` y `FECHAS.contador3` estén definidos si vas a usar estos contadores.
+      // El contador para "contenedor-cajas-2" se inicia dentro de `mostrarContador2` cuando es pertinente.
+      
+      if (document.getElementById("contenedor-cajas-3") && FECHAS.contador3) {
+        iniciarContador("contenedor-cajas-3", FECHAS.contador3); // Contador para bloque fase 3 (si existe)
+      }
+      
+      actualizarFixedButton(); // Actualiza el botón fijo inmediatamente
+    }
+
+    
+    // ---------- CONFIGURACIÓN DE EVENT LISTENERS ----------
+    // (Mueve aquí tus window.addEventListener y otros)
+
+    // Esperar a que el DOM esté completamente cargado ANTES de manipularlo
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", alCargarDOM);
+    
+    } else {
+      // El DOM ya está cargado, ejecuta inmediatamente
+      alCargarDOM();
+    }
+    
+    // ANIMAR FIXEDBUTTON
+    window.addEventListener("load", animarFixedButton); // Puede ser útil para animaciones que dependen de todos los recursos cargados
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        animarFixedButton();
+      }
+    });
+
+    // 👉 SCRIPT QUE PERMITE INSTALAR LA APP (PWA)
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('Evento beforeinstallprompt detectado.');
+      e.preventDefault(); // Evita el prompt automático
+      deferredPrompt = e;
+
+      const installBtn = document.getElementById('btn-instalar');
+      if (installBtn) {
+        installBtn.style.display = 'inline-block';
+        installBtn.addEventListener('click', () => {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+              if (choiceResult.outcome === 'accepted') {
+                console.log('El usuario aceptó la instalación');
+              } else {
+                console.log('El usuario rechazó la instalación');
+              }
+              deferredPrompt = null; // Solo se puede usar una vez
+            });
+          }
+        });
+      } else {
+        console.warn('Botón con ID "btn-instalar" no encontrado para PWA.');
+      }
+    });
+
+    // Aquí puedes añadir cualquier otra lógica que deba ejecutarse una vez que todo esté listo.
+    console.log("👍 Script principal completamente configurado.");
+
+ /* } // Fin de ejecutarScriptPrincipal() */
+
+
+  // ============ PUNTO DE ENTRADA: INICIAR EL PROCESO ============
+  esperarConstantesYEjecutar();
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

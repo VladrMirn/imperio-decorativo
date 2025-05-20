@@ -1,0 +1,18 @@
+# Ignora dependencias
+node_modules/
+
+# Ignora carpetas de build
+dist/
+build/
+.cache/
+p/
+
+# Archivos de logs
+*.log
+
+# Config local
+.vscode/
+
+# Puedes ignorar src completo si solo quieres subir output.css
+src/
+!src/output.css
